@@ -5,4 +5,4 @@ version: 2
     schema: false
     identifier: false
   tables:
-  - name: _airbyte_raw_manual_price_configs
+  - name: _airbyte_raw_get_merchant_listings_all_data
