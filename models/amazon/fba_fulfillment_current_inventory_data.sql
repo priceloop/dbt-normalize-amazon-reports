@@ -10,7 +10,7 @@ with temp2 as (
         {{ json_extract_scalar('_airbyte_data', ['fnsku'], ['fnsku']) }}::text as fnsku,
         {{ json_extract_scalar('_airbyte_data', ['country'], ['country']) }}::text as marketplace,
         -- {{ json_extract_scalar('_airbyte_data', ['seller-sku'], ['seller-sku']) }}::text as seller_sku,
-        nullif({{ json_extract_scalar('_airbyte_data', ['quantity'], ['quantity']) }}, '')::float as sellable_inventroy
+        nullif({{ json_extract_scalar('_airbyte_data', ['quantity'], ['quantity']) }}, '')::float as sellable_inventory
         
     from {{ source(
             env_var('DATABASE_SCHEMA', var('source_schema', '')),
