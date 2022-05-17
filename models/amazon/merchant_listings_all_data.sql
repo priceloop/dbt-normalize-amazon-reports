@@ -1,3 +1,9 @@
+{{ 
+    config(
+        alias=env_var('DESTINATION_TABLE1', var('destination_table', ''))
+    )
+ }}
+
 with temp1 as (
     select
         {{ json_extract_scalar('_airbyte_data', ['item-name'], ['item-name']) }}::text as item_name,
@@ -29,38 +35,13 @@ with temp1 as (
         {{ json_extract_scalar('_airbyte_data', ['fulfillment-channel'], ['fulfillment-channel']) }}::text as fulfillment_channel,
         {{ json_extract_scalar('_airbyte_data', ['merchant-shipping-group'], ['merchant-shipping-group']) }}::text as merchant_shipping_group,
         {{ json_extract_scalar('_airbyte_data', ['status'], ['status']) }}::text as status
-    from {{ source('amazon', '_airbyte_raw_get_merchant_listings_all_data') }} as table_alias
+    from {{ source(
+            env_var('DATABASE_SCHEMA', var('source_schema', '')),
+            env_var('SOURCE_RAW_MERCHANT_LISTING_ALL_DATA', var('source_table', ''))
+    ) }} as table_alias
 )
 select 
-    item_name,
-    item_description,
-    listing_id,
-    seller_sku,
-    price,
-    quantity,
-    open_date,
-    image_url,
-    item_is_marketplace,
-    product_id_type,
-    zshop_shipping_fee,
-    item_note,
-    item_condition,
-    zshop_category1,
-    zshop_browse_path,
-    zshop_storefront_feature,
-    asin1,
-    asin2,
-    asin3,
-    will_ship_internationally,
-    expedited_shipping,
-    zshop_boldface,
-    product_id,
-    bid_for_featured_placement,
-    add_delete,
-    pending_quantity,
-    fulfillment_channel,
-    merchant_shipping_group,
-    status
+    *
 from temp1
 
 
