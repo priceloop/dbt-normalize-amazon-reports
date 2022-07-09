@@ -11,7 +11,7 @@ with temp1 as (
         {{ json_extract_scalar('_airbyte_data', ['listing-id'], ['listing-id']) }}::text as listing_id,
         {{ json_extract_scalar('_airbyte_data', ['seller-sku'], ['seller-sku']) }}::text as seller_sku,
         nullif({{ json_extract_scalar('_airbyte_data', ['price'], ['price']) }}, '')::float as price,
-        {{ json_extract_scalar('_airbyte_data', ['quantity'], ['quantity']) }}::text as quantity,
+        nullif({{ json_extract_scalar('_airbyte_data', ['quantity'], ['quantity']) }}, '')::float as quantity,
         {{ json_extract_scalar('_airbyte_data', ['open-date'], ['open-date']) }}::text as open_date,
         {{ json_extract_scalar('_airbyte_data', ['image-url'], ['image-url']) }}::text as image_url,
         {{ json_extract_scalar('_airbyte_data', ['item-is-marketplace'], ['item-is-marketplace']) }}::text as item_is_marketplace,
