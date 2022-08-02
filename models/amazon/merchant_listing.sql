@@ -1,8 +1,4 @@
-{{ 
-    config(
-        alias=env_var('DESTINATION_TABLE1', var('destination_table', ''))
-    )
- }}
+
 
 with temp1 as (
     select
@@ -37,7 +33,7 @@ with temp1 as (
         {{ json_extract_scalar('_airbyte_data', ['status'], ['status']) }}::text as status
     from {{ source(
             env_var('DATABASE_SCHEMA', var('source_schema', '')),
-            env_var('SOURCE_RAW_MERCHANT_LISTING_ALL_DATA', var('source_table', ''))
+            '_airbyte_raw_get_merchant_listings_all_data'
     ) }} as table_alias
 )
 select 

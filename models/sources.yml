@@ -6,7 +6,7 @@ sources:
     schema: false
     identifier: false
   tables:
-  - name: "{{env_var('SOURCE_RAW_MERCHANT_LISTING_ALL_DATA', var('source_table', ''))}}"
+  - name: _airbyte_raw_get_merchant_listings_all_data
 
 - name: "{{env_var('DATABASE_SCHEMA', var('source_schema', ''))}}"
   quoting:
@@ -14,4 +14,4 @@ sources:
     schema: false
     identifier: false
   tables:
-  - name: "{{env_var('SOURCE_RAW_FBA_FULFILLMENT_CURRENT_INVENTORY_REPORT', var('source_table', ''))}}"
+  - name: _airbyte_raw_get_fba_fulfillment_current_inventory_data
