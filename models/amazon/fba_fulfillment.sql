@@ -1,8 +1,4 @@
-{{ 
-    config(
-        alias=env_var('DESTINATION_TABLE2', var('destination_table', ''))
-    )
- }}
+
 
 with temp2 as (
     select
@@ -16,7 +12,7 @@ with temp2 as (
         
     from {{ source(
             env_var('DATABASE_SCHEMA', var('source_schema', '')),
-            env_var('SOURCE_RAW_FBA_FULFILLMENT_CURRENT_INVENTORY_REPORT', var('source_table', ''))
+            '_airbyte_raw_get_fba_fulfillment_current_inventory_data'
     ) }} as table_alias
 )
 select 
